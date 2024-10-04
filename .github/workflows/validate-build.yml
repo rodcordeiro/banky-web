@@ -1,0 +1,31 @@
+on:
+  push:
+    branches: 'develop'
+
+name: Validate Build
+
+env:
+  NODE_ENV: development
+
+jobs:
+  FTP-Deploy-Action:
+    name: Deploy to ftp
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build project
+        run: pnpm run build
+
