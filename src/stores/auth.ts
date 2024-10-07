@@ -2,7 +2,9 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { z } from 'zod';
 
-export const AuthenticatedUserSchema = z.object({});
+export const AuthenticatedUserSchema = z.object({
+    accessToken: z.string().optional(),
+});
 
 export type AuthStore = {
 	auth: AuthenticatedUser | null;

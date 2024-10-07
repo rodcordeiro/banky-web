@@ -1,3 +1,4 @@
+import { authHook } from '@/stores/auth';
 import axios from 'axios';
 
 export const api = axios.create({
@@ -8,9 +9,9 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((req) => {
-	const token = localStorage.getItem('auth');
-	if (token) {
-		req.headers['Authorization'] = `Bearer ${token.toString()}`;
+	const auth = authHook().auth as AuthenticatedUser;
+	if (auth.accessToken) {
+		req.headers['Authorization'] = `Bearer ${auth.accessToken.toString()}`;
 	}
 	return req;
 });
