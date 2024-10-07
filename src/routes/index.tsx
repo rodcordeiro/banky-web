@@ -5,7 +5,10 @@ const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <BaseLayout />,
-		// errorElement: <ErrorPage />,
+		// errorElement: <Err00orPage />,
+		loader: () => {
+			return true;
+		},
 		children: [
 			{
 				path: '/',
