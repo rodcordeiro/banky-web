@@ -3,7 +3,9 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { z } from 'zod';
 
 export const AuthenticatedUserSchema = z.object({
-    accessToken: z.string().optional(),
+	accessToken: z.string().optional(),
+	refreshToken: z.string().optional().describe('Refresh token'),
+	expires: z.number().optional().describe('Expiration date timestamp'),
 });
 
 export type AuthStore = {
