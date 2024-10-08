@@ -14,7 +14,7 @@ export const Header = ({ toggleSidebar }: HeaderProps) => {
 	};
 
 	return (
-		<header className="bg-electric-violet-900 w-full h-fit text-white px-10 py-4 flex row items-center justify-between">
+		<header className="bg-electric-violet-950 w-full h-fit text-white px-10 py-4 flex row items-center justify-between">
 			<img
 				src="https://rodcordeiro.github.io/shares/favicons/favicon-raizes/android-icon-192x192.png"
 				alt="Logo raizes"
