@@ -8,7 +8,7 @@ const router = createBrowserRouter([
 		element: <BaseLayout />,
 		// errorElement: <ErrorPage />,
 		loader: () => {
-			const auth = authHook().auth as AuthenticatedUser;
+			const auth = authHook().auth as Auth;
 			console.log({ auth });
 			if (auth === null) return redirect('/login');
 			return true;

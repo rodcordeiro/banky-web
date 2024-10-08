@@ -1,16 +1,9 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { z } from 'zod';
-
-export const AuthenticatedUserSchema = z.object({
-	accessToken: z.string().optional(),
-	refreshToken: z.string().optional().describe('Refresh token'),
-	expires: z.number().optional().describe('Expiration date timestamp'),
-});
 
 export type AuthStore = {
-	auth: AuthenticatedUser | null;
-	setAuth(_auth: Partial<AuthenticatedUser>): void;
+	auth: Auth | null;
+	setAuth(_auth: Partial<Auth>): void;
 	reset(): void;
 };
 
@@ -18,10 +11,13 @@ export const useAuth = create(
 	persist<AuthStore>(
 		(set) => ({
 			auth: null,
-			setAuth: (auth: Partial<AuthenticatedUser>) =>
+			setAuth: (auth: Partial<Auth>) =>
 				set((state) => ({
 					...state,
-					auth: { ...state.auth, ...auth },
+					auth: {
+						...state.auth,
+						...auth,
+					} as Auth,
 				})),
 			reset: () => {
 				set((state) => ({

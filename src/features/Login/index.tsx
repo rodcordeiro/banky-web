@@ -1,4 +1,16 @@
+import { Button } from '@/components/tools/Button';
+import { useLoginHook } from './hooks/login.hook';
+
 export const Login = () => {
+	const {
+		loading,
+		username,
+		password,
+		handleUpdateUsername,
+		handleUpdatePassword,
+		handleAuth,
+	} = useLoginHook();
+
 	return (
 		<div className="flex h-screen w-screen bg-gray-900">
 			<div className="flex flex-col w-2/5 h-full  justify-end px-8 pb-20 ">
@@ -14,6 +26,8 @@ export const Login = () => {
 						placeholder="Insira seu usuário"
 						type="text"
 						className="px-4 py-2 rounded my-2 "
+						value={username}
+						onChange={handleUpdateUsername}
 					/>
 				</div>
 				<div className="flex flex-col mb-2 w-full">
@@ -26,14 +40,11 @@ export const Login = () => {
 						placeholder="Insira sua senha"
 						type="password"
 						className="px-4 py-2 rounded my-2 "
+						value={password}
+						onChange={handleUpdatePassword}
 					/>
 				</div>
-				<button
-					type="button"
-					className="py-2 px-4 rounded outline-none border-none bg-violet-400 w-full"
-				>
-					Acessar
-				</button>
+				<Button content="Acessar" onClick={handleAuth} loading={loading} />
 			</div>
 			<div className="w-full h-full p-2">
 				<img
