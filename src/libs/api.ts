@@ -9,9 +9,15 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((req) => {
-	const auth = authHook().auth as Auth;
-	if (auth?.accessToken) {
-		req.headers['Authorization'] = `Bearer ${auth.accessToken.toString()}`;
+	const { auth, reset } = authHook();
+	if (auth) {
+		// if (auth.expires ?? 0 < Date.now()) {
+		// 	reset();
+		// 	return Promise.reject('Unauthorized');
+		// }
+		if (auth?.accessToken) {
+			req.headers['Authorization'] = `Bearer ${auth.accessToken.toString()}`;
+		}
 	}
 	return req;
 });

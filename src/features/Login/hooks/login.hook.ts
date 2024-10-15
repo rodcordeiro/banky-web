@@ -2,10 +2,12 @@ import { api } from '@/libs/api';
 import { useAuth } from '@/stores/auth';
 import { useSnackbar } from 'notistack';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function useLoginHook() {
 	const { enqueueSnackbar } = useSnackbar();
 	const { setAuth } = useAuth();
+	const navigate = useNavigate();
 	const [loading, setLoading] = React.useState<boolean>(false);
 	const [username, setUsername] = React.useState<string>();
 	const [password, setPassword] = React.useState<string>();
@@ -32,7 +34,10 @@ export function useLoginHook() {
 					});
 				setAuth(data[0]);
 			})
-			.finally(() => setLoading(false));
+			.finally(() => {
+				setLoading(false);
+				navigate('/');
+			});
 	}, [username, password]);
 
 	const handleUpdateUsername = React.useCallback(
